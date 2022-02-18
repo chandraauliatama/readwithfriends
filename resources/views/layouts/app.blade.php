@@ -32,9 +32,12 @@
                 </ul>
                 <ul>
                     <li>
-                        <a href="" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">
-                            Log Out
-                        </a>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button type="submit" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">
+                                Log Out
+                            </button>
+                        </form>
                     </li>
                 </ul>
             @endauth
@@ -42,19 +45,19 @@
             @guest
                 <ul>
                     <li>
-                        <a href="" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">
+                        <a href="/" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">
                             Home
                         </a>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <a href="" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">
+                        <a href="{{ route('login') }}" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">
                             Login
                         </a>
                     </li>
                     <li>
-                        <a href="" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">
+                        <a href="{{ route('register') }}" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">
                             Register
                         </a>
                     </li>
