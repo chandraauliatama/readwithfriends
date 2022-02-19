@@ -8,70 +8,44 @@
     <link rel="stylesheet" href="{{ asset('css/app.css')}}">
 </head>
 <body>
-    <div class="mx-auto max-w-4xl px-6 grid grid-cols-8 gap-12 mt-16">
-        <div class="hidden sm:block col-span-2 border-r border-slate-200 space-y-6">
-            @auth
-                <ul>
-                    <li>
-                        <span class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">
-                            {{ auth()->user()->name }}
-                        </span>
-                    </li>
-                    <li>
-                        <a href="" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">
-                            Feed
-                        </a>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <a href="" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">
-                            My Books
-                        </a>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <form action="{{ route('logout') }}" method="post">
-                            @csrf
-                            <button type="submit" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">
-                                Log Out
-                            </button>
-                        </form>
-                    </li>
-                </ul>
-            @endauth
-
-            @guest
-                <ul>
-                    <li>
-                        <a href="/" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">
-                            Home
-                        </a>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <a href="{{ route('login') }}" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">
-                            Login
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('register') }}" class="font-bold text-lg text-slate-600 hover:text-slate-800 block py-1">
-                            Register
-                        </a>
-                    </li>
-                </ul>
-            @endguest
+    <div class="block sm:grid mx-auto max-w-4xl px-6 grid-cols-8 gap-12 mt-8 sm:mt-16">
+        <div id="nav" class="hidden sm:block col-span-2 border-b sm:border-b-0 sm:border-r border-slate-200 space-y-6 mb-5 pb-3">
+            <x-auth-nav/>
+            <x-guest-nav/>
+            <button onclick="navToggle()" class="sm:hidden space-y-1.5 fixed top-4 right-6">
+                      <span class="block w-6 h-0.5 bg-slate-600 rotate-45 translate-y-2"></span>
+                      <span class="block w-6 h-0.5 bg-slate-600 -rotate-45"></span>
+            </button>
         </div>
         <div class="col-span-6">
-            @isset($header)
-                <h1 class="font-bold text-2xl text-slate-800">
-                    {{ $header }}
-                </h1>
-            @endisset
+            <div class="flex items-center place-content-between">
+                @isset($header)
+                        <h1 class="font-bold text-2xl text-slate-800">
+                            {{ $header }}
+                        </h1>
+                @endisset
+                <button id="hamburger" onclick="navToggle()" class="sm:hidden space-y-1.5">
+                          <span class="block w-7 h-0.5 bg-slate-600"></span>
+                          <span class="block w-7 h-0.5 bg-slate-600"></span>
+                          <span class="block w-4 h-0.5 bg-slate-600"></span>
+                </button>
+            </div>
             {{ $slot }}
         </div>
     </div>
+
+    <script>
+        function navToggle() {
+            var nav = document.getElementById("nav");
+            var hamburger = document.getElementById("hamburger");
+            if(nav.classList.contains("hidden")) {
+                nav.classList.remove("hidden");
+                hamburger.classList.add("hidden");
+            }else{
+                nav.classList.add("hidden");
+                hamburger.classList.remove("hidden");
+            }
+        }
+    </script>
 </body>
 </html>

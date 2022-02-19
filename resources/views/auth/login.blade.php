@@ -1,35 +1,23 @@
 <x-layouts.app>
     <x-slot name="header">
-        Login
+        {{ __('Login') }}
     </x-slot>
 
     <form action="{{ route('login') }}" method="post" class="mt-4 space-y-4">
         @csrf
 
-        @if ($errors->any())
-                <div class="font-medium text-red-600">
-                    {{ __('Whoops! Something went wrong.') }}
-            
-                <ul class="mt-3 list-disc list-inside text-sm text-red-600">
-                    @foreach ($errors->all() as $error)
-                        <li class="list-none">{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        <x-validation-errors :errors="$errors"/>
 
         <div class="space-y-1">
-            <label for="email" class="block">Email</label>
-            <input type="email" name="email" id="email" placeholder="e.g. cat@gmail.com" class="rounded block w-full" value="{{ old('email') }}">
+            <x-label for="email">{{ __('Email') }}</x-label>
+            <x-input id="email" type="email" name="email" value="{{ old('email') }}" placeholder="e.g. chandra@sepuh.com" autofocus />
         </div>
 
         <div class="space-y-1">
-            <label for="password" class="block">Password</label>
-            <input type="password" name="password" id="password" class="rounded block w-full">
+            <x-label for="password">{{ __('Password') }}</x-label>
+            <x-input id="password" type="password" name="password" />
         </div>
 
-        <button type="submit" class="bg-slate-200 hover:bg-slate-400 px-3 py-2 rounded">
-            Login
-        </button>
+        <x-button>{{ __('Login') }}</x-button>
     </form>
 </x-layouts.app>
