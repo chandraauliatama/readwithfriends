@@ -13,12 +13,12 @@
     </ul>
     <ul>
         <li>
-            <a href="" class="nav-item">
+            <a href="/" class="nav-item">
                 {{ __('My Books') }}
             </a>
         </li>
         <li>
-            <a href="" class="nav-item">
+            <a href="{{ route('books.create') }}" class="nav-item">
                 {{ __('Add a Book') }}
             </a>
         </li>

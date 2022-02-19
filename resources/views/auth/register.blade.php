@@ -3,7 +3,7 @@
         {{ __('Sign Up') }}
     </x-slot>
 
-    <form action="{{ route('register') }}" method="post" class="mt-4 space-y-4">
+    <form action="{{ route('register') }}" method="post" class="mt-8 space-y-4">
         @csrf
         <x-validation-errors :errors="$errors"/>
 
