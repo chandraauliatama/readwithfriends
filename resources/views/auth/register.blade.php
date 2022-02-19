@@ -22,6 +22,11 @@
             <x-input id="password" type="password" name="password" />
         </div>
 
+        <div class="space-y-1">
+            <x-label for="password_confirmation">{{ __('Confirm Password') }}</x-label>
+            <x-input id="password_confirmation" type="password" name="password_confirmation" />
+        </div>
+
         <x-button>{{ __('Create Account') }}</x-button>
     </form>
 </x-layouts.app>

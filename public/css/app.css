@@ -593,14 +593,11 @@ select {
 .fixed {
   position: fixed;
 }
-.top-3 {
-  top: 0.75rem;
+.top-4 {
+  top: 1rem;
 }
 .right-6 {
   right: 1.5rem;
-}
-.top-4 {
-  top: 1rem;
 }
 .col-span-2 {
   grid-column: span 2 / span 2;
@@ -672,6 +669,9 @@ select {
 .list-disc {
   list-style-type: disc;
 }
+.list-none {
+  list-style-type: none;
+}
 .grid-cols-8 {
   grid-template-columns: repeat(8, minmax(0, 1fr));
 }
@@ -710,9 +710,13 @@ select {
 .border-b {
   border-bottom-width: 1px;
 }
-.border-slate-200 {
+.border-slate-600 {
   --tw-border-opacity: 1;
-  border-color: rgb(226 232 240 / var(--tw-border-opacity));
+  border-color: rgb(71 85 105 / var(--tw-border-opacity));
+}
+.border-slate-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(203 213 225 / var(--tw-border-opacity));
 }
 .bg-slate-200 {
   --tw-bg-opacity: 1;

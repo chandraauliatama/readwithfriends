@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="block sm:grid mx-auto max-w-4xl px-6 grid-cols-8 gap-12 mt-8 sm:mt-16">
-        <div id="nav" class="hidden sm:block col-span-2 border-b sm:border-b-0 sm:border-r border-slate-200 space-y-6 mb-5 pb-3">
+        <div id="nav" class="hidden sm:block col-span-2 border-b sm:border-b-0 sm:border-r border-slate-300 space-y-6 mb-5 pb-3">
             <x-auth-nav/>
             <x-guest-nav/>
             <button onclick="navToggle()" class="sm:hidden space-y-1.5 fixed top-4 right-6">
