@@ -2,29 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookRequest;
 use App\Models\Book;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class BookController extends Controller
 {
-    private $status = ["want to read", "finished reading", "reading"];
-    private $rules;
-
-    public function __construct()
+    /** 
+    * Check if the user really has access to the data and routes
+    *
+    * @param  \App\Models\Book  $book
+    **/
+    private function checkTrueUser(Book $book)
     {
-        $this->rules = [
-            'title' => 'required|max:100',
-            'author' => 'required|max:100',
-            'pages' => 'required|max:5',
-            'status' => 'required|in:' .implode(',', $this->status),
-        ];
+        if (! Gate::allows('book-controller', $book)) {
+            abort(403);
+        }
     }
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function index()
     {
         $books = auth()->user()->books()->latest()->get();
@@ -38,7 +38,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        $statuses = $this->status;
+        $statuses = Book::STATUS;
         return view('bookpage.create', compact('statuses'));
     }
 
@@ -48,9 +48,10 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
-        auth()->user()->books()->create($request->validate($this->rules));
+        $request->validated();
+        auth()->user()->books()->create($request);
         return redirect('books');
     }
 
@@ -73,7 +74,8 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        $statuses = $this->status;
+        $this->checkTrueUser($book);
+        $statuses = Book::STATUS;
         return view('bookpage.edit', compact('statuses', 'book'));
     }
 
@@ -84,9 +86,10 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(BookRequest $request, Book $book)
     {
-        $request->validate($this->rules);
+        $this->checkTrueUser($book);
+        $request->validated();
     }
 
     /**
