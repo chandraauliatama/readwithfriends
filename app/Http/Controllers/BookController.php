@@ -7,12 +7,19 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    protected $rules = [
+    private $status = ["want to read", "finished reading", "reading"];
+    private $rules;
+
+    public function __construct()
+    {
+        $this->rules = [
             'title' => 'required|max:100',
             'author' => 'required|max:100',
             'pages' => 'required|max:5',
-            'status' => 'required',
-    ];
+            'status' => 'required|in:' .implode(',', $this->status),
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +38,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('bookpage.create');
+        $statuses = $this->status;
+        return view('bookpage.create', compact('statuses'));
     }
 
     /**
@@ -65,7 +73,8 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        $statuses = $this->status;
+        return view('bookpage.edit', compact('statuses', 'book'));
     }
 
     /**
@@ -77,7 +86,7 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $request->validate($this->rules);
     }
 
     /**

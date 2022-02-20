@@ -21,9 +21,7 @@
             <x-label for="pages">{{ __('Number of pages') }}</x-label>
             <x-input id="pages" type="number" name="pages" value="{{ old('pages') }}" placeholder="249" autofocus/>
         </div>
-        @php
-            $statuses = ["want to read", "finished reading", "reading"];   
-        @endphp
+
         <div class="space-y-1">
             <x-label for="status">{{ __('Status') }}</x-label>
             <select name="status" id="status" class="rounded block w-full">
