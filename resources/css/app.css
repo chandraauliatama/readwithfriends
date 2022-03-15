@@ -5,3 +5,7 @@
 .nav-item {
     @apply font-bold text-lg text-slate-600 hover:text-slate-800 block py-1;
 }
+
+.nav-item-active {
+    @apply font-bold text-lg text-slate-800 hover:text-slate-800 block py-1;
+}
