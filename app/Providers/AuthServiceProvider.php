@@ -25,7 +25,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerPolicies(); 
+        $this->registerPolicies();
         Gate::define('book-controller', function (User $user, Book $book) {
             return $user->id === $book->user_id;
         });

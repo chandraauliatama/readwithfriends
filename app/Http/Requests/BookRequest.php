@@ -28,7 +28,7 @@ class BookRequest extends FormRequest
             'title' => 'required|max:100',
             'author' => 'required|max:100',
             'pages' => 'required|max:5',
-            'status' => 'required|in:' .implode(',', Book::STATUS),
+            'status' => 'required|in:'.implode(',', Book::STATUS),
         ];
     }
 }

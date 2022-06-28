@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Gate;
 
 class BookController extends Controller
 {
-    /** 
-    * Check if the user really has access to the data and routes
-    *
-    * @param  \App\Models\Book  $book
-    **/
+    /**
+     * Check if the user really has access to the data and routes
+     *
+     * @param  \App\Models\Book  $book
+     **/
     private function checkTrueUser(Book $book)
     {
         if (! Gate::allows('book-controller', $book)) {
@@ -24,10 +24,11 @@ class BookController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */ 
+     */
     public function index()
     {
         $books = auth()->user()->books()->latest()->get();
+
         return view('bookpage.index', compact('books'));
     }
 
@@ -39,6 +40,7 @@ class BookController extends Controller
     public function create()
     {
         $statuses = Book::STATUS;
+
         return view('bookpage.create', compact('statuses'));
     }
 
@@ -52,6 +54,7 @@ class BookController extends Controller
     {
         $request->validated();
         auth()->user()->books()->create($request);
+
         return redirect('books');
     }
 
@@ -76,6 +79,7 @@ class BookController extends Controller
     {
         $this->checkTrueUser($book);
         $statuses = Book::STATUS;
+
         return view('bookpage.edit', compact('statuses', 'book'));
     }
 

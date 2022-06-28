@@ -10,8 +10,9 @@ class Book extends Model
     use HasFactory;
 
     protected $guarded = [];
-    const STATUS = ["want to read", "finished reading", "reading"];
-    
+
+    const STATUS = ['want to read', 'finished reading', 'reading'];
+
     public function user()
     {
         return $this->hasOne(User::class);
