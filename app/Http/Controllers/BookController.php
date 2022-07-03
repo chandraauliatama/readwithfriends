@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookRequest;
 use App\Models\Book;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
+
 
 class BookController extends Controller
 {
@@ -27,9 +29,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = auth()->user()->books()->latest()->get();
-
-        return view('bookpage.index', compact('books'));
+        $bookByStatus = Book::where('user_id', auth()->id())->orderBy('status', 'desc')->get()->groupBy('status');
+        return view('bookpage.index', compact('bookByStatus'));
     }
 
     /**
@@ -52,8 +53,7 @@ class BookController extends Controller
      */
     public function store(BookRequest $request)
     {
-        $request->validated();
-        auth()->user()->books()->create($request);
+        auth()->user()->books()->create($request->validated());
 
         return redirect('books');
     }
@@ -93,7 +93,8 @@ class BookController extends Controller
     public function update(BookRequest $request, Book $book)
     {
         $this->checkTrueUser($book);
-        $request->validated();
+        $book->update($request->validated());
+        return redirect('/books');
     }
 
     /**

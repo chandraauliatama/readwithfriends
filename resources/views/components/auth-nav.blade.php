@@ -2,7 +2,7 @@
     <ul>
         <li>
             <span class="nav-item">
-                {{ Str::title((Str::limit(auth()->user()->name, 14, '...'))) }}
+                {{ Str::title(Str::limit(auth()->user()->name, 14, '...')) }}
             </span>
         </li>
         <li>
@@ -13,7 +13,7 @@
     </ul>
     <ul>
         <li>
-            <a href="/" class="nav-item">
+            <a href="{{ route('books.index') }}" class="nav-item">
                 {{ __('My Books') }}
             </a>
         </li>
@@ -39,4 +39,3 @@
         </li>
     </ul>
 @endauth
-
