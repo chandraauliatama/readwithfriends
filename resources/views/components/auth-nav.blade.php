@@ -23,7 +23,7 @@
             </a>
         </li>
         <li>
-            <a href="" class="nav-item">
+            <a href="/friend" class="nav-item">
                 {{ __('Friends') }}
             </a>
         </li>
